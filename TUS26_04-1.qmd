@@ -49,7 +49,7 @@ format:
 
 ## Plan of the day 
 
-1.  Introduction and measurement
+1. Introduction:   What is time? 
 2. A brief history of time use studies
 3. Time use surveys and time diaries
 4. Typical time use analysis
@@ -73,7 +73,7 @@ Time as implicit knowledge (Adam 2006)
 
 
  
-## Growing  interest from the 20th C. onwards 
+## Growing interest for measured time 
 
 -  Early 20th Century: peasant households in Russia  \& the Fabians (Women in London) 
 -  Soviet economists: Time Budgets of Russian Workers in 1923–1924; 
@@ -98,7 +98,7 @@ Time as implicit knowledge (Adam 2006)
 -  Alexander Szalai's *The Use of Time* 
 
  	 -  Pioneering survey of mostly urban households in 12 countries
-	 -  First systematic time diary data collection: '*who does what, where, with whom, over 24h '
+	 -  First systematic time diary data collection: '*who does what, where, with whom*'  over 24h periods
 
 
 -  Multinational Time Use Study (MTUS)
