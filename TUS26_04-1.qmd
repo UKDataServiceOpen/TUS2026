@@ -113,7 +113,7 @@ Time as implicit knowledge (Adam 2006)
 
 ## What does  time use surveys look like? 
  
--  Example: 2015 UK Time Use Survey
+-  Example: [2015 UK Time Use Survey](https://datacatalogue.ukdataservice.ac.uk/studies/study/8128#details)
 
 	 -  16,550 diary days of 10,208 respondents in 4,238 households
 	 
