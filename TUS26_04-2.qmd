@@ -1,0 +1,199 @@
+---
+title: Introduction to  time diary data 
+subtitle: 2. Structure and design of time diary data
+author: 
+  name: Pierre Walthéry
+institute: UK Data Service
+#bibliography: inference.bib
+date: "June 2026"
+date-format: MMMM YYYY
+#brand: _brand.yml
+include-after-body:
+  - text: |
+      <script type="text/javascript">
+          window.addEventListener('load', function() {
+            var logo = document.querySelector('.slide-logo');
+            var url = 'https://ukdataservice.ac.uk';
+            logo.style.cursor = 'pointer';
+            logo.addEventListener('click', function() {
+              window.open(url, '_blank');
+          );
+        );
+      </script>
+
+filters:
+  - reveal-header
+  - collapse-callout
+  
+collapse-callout:
+  all: true
+
+
+format: 
+  revealjs:
+    scrollable: true
+    logo: 
+      path: "pics/UKDS_Logos_Col_Grey_300dpi.png"
+      href: "https://ukdataservice.ac.uk"
+      alt: "UK Data Service logo"
+    css: ukds_long.css
+    embed-resources: true
+    smaller: true
+---
+
+## Some basic vocabulary
+
+- **Activity** Action recorded by respondents in the time diary ie what the respondent was doing during an episode
+
+	- Example: I am teaching time diary analysis
+	- Multitasking: Primary vs secondary
+
+- **Episode** Any unique combination of primary, secondary activity, copresence and location
+
+	- Episode 1. I watch TV whilst eating crisps alone at home; 
+	- Episode 2. I watch TV whilst eating crisps with my son at home	
+	- Episode 3. I play video games whilst eating crisps with my son at home
+	
+- **Time slot**  Minimum duration of an episode (ie resolution of the time diary). Usually 10 or 15 mins
+
+
+## Data structure of time use surveys
+
+![](pics/concentric){fig-align="center"}
+
+
+
+
+## Data structure  and files 
+
+1. Individual files ie person-level data
+
+	- Socio-demographic characteristics ie age, education...
+
+2. Day-level files (aka 'aggregate' files)
+
+	- Each line in the dataset records a day
+	- Often, 2 or more lines per respondent
+	- Aggregate variables (ie time spent on activities)
+	
+	- Also sometimes include day level variables: *Is this a rushed day?*
+	- May also include time diary data in wide format
+
+
+
+
+##  Episode data
+
+- Each line in the dataset records an *episode*
+- On average 15 episodes per day per person
+- Episodes are embedded within days within persons
+- One of the most common time diary format
+- Intuitive, but requires more storage space and computing power than wide format
+- Requires episode number, duration, start and end time
+
+|		Ep nr 	 |Person nr	|Day nr	|Duration	|Activity		|Start|End|
+|------------|----------|-------|---------|-----------|-----|---|
+|		1  				|1				|1			|360				|Sleep			|10			|370|
+|		2  				|1				|1			|20				|Shower	 |370		|390|
+|		3  				|1				|1			|30				|Breakfast	 |390		|420|
+
+## Slot-level data 
+
+- Each line records the time unit of the diary 
+- Largest datasets
+- 144 observations (ie 10 minute slots) per day
+- Requires a slot identifier variables
+	
+|	Slot nr|Person nr	|Day nr	|Activity|				
+|--------|----------|-------|--------|
+|	1 			|1				|1			|Sleep|			
+|...			|...			|...    |...|
+|	42  		|1				|1			|Shower|
+|	43  		|1				|1			|Shower|
+|	44  		|1				|1			|Breakfast|	 
+|	... 		|...			|...    |...|
+|	144 		|1				|1			|Sleep| 
+			
+- In many time use surveys, days begin at 4 AM and end at  3.59 AM
+
+
+## Data structure  in wide format
+	
+- During this course, we will be working with episode files in the long format
+- However, episode or time slots  datasets are also available in wide format:
+- Example of a time slots dataset in the wide format:
+		
+
+
+|Day|Pers. |Activity -- TS 1|...|Act. -- TS 42|...|Act. -- TS 144	
+|----|-----|----------------|---|-------------|---|--------------|
+|1  |1|Sleep|...   |Sleep|...|Watch TV			
+|2  |1				|Sleep|...	|Commute|...|Sleep
+|1  |2				|Sleep|...|Shower|...|Sleep
+	
+
+- Each line represents a day, each time slot  and its attributes (activities, location, copresence are recorded in one variable)
+- Lots of variable, less intuitive but more parsimonious than the long format
+
+
+
+## Common time diary variables
+	
+- Most time diary datasets include similar variables:
+
+  - Primary and secondary activities
+  - If episode files: duration
+  - Incremental time/clock time
+  - Copresence, ie 'with who were you?'
+  - Location
+  - Day of the week, month, calendar date
+  - Diary number (ie whether this diary was the first one collected)
+
+  - Less common variables/recent innovations
+
+		 - Whether feels rushed on the day
+		 - Enjoyment
+		 - Device use
+		 - Work schedule
+					
+
+
+
+## Nomenclatures of activities
+
+- In many time use surveys, respondents still fill in their time diary by hand
+- Activities are written down literally (ie *I walked the dog around the block*) and need to be recoded
+- Indispensable to standardise activities
+- National and international norms and guidelines for coding activities
+		
+- Three main international 'Western' nomenclatures: MTUS,HETUS. ICATUS (UN-based)
+- National nomenclatures: US (ie ATUS), Japanese, Korean, Indian Time Use surveys have their own
+
+
+## Harmonised European Time-use survey nomenclature	
+
+![](pics/HETUS){fig-align="center"}
+
+## Indian Time Use Survey nomenclature	
+
+![](pics/ITUS){fig-align="center"}
+
+## American Time Use Survey nomenclature	
+
+![](pics/ATUS){fig-align="center"}
+
+## MTUS nomenclature	
+
+![](pics/MTUS){fig-align="center"}
+
+## Workflow: producing time use estimates from time diaries
+
+- One can:
+	- ... work directly with aggregate variables in day-level datasets ('Aggregate files' in MTUS jargon)
+	- ... compute one's own, which usually entails four steps:
+
+		1 Recoding original time use activities in the episode dataset 
+		2 Sum the time spent on these activities (for example total daily time ) within day, person
+		3 Merge the data with person-level information of interest
+		4 Produce the estimate of interest (ie, mean, median, etc)
+		

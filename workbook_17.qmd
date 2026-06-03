@@ -1,0 +1,377 @@
+---
+title: Introduction to quantitative time diary analysis
+subtitle: Day 2 exercices
+author: Pierre Walthéry
+organisation:   UK Data Service and Centre for Time Use Research 
+date: "17 October 2023"
+mainfont: Arial
+sansfont: Arial
+
+format:
+  # pdf:
+  #  toc: false
+  #  number-sections: false
+  #  colorlinks: true
+  #  papersize: A4
+  #  geometry:
+  #     - top=30mm
+  #     - left=20mm
+  #     - heightrounded
+   html:
+    toc: true
+    toc-location: left
+    toc-title: Content
+    embed-resources: true
+
+pdf-engine: lualatex
+execute: 
+  echo: true
+  warning: false
+  include: true
+---
+
+
+# 1. Another illustration of computing episodes from episodes files
+
+... using MTUS data from last week
+
+
+Let's open the episode and aggregate (day level)  files as we did last week
+
+```{r Prep,message=F }
+rm(list=ls())
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(haven)
+
+setwd("~/Dropbox/work/UKDS/trainings/TU2023/Day_1/practical")
+
+ep<-read_dta("data/mtus_teach_ep.dta")%>%select(-msamp,-swave,-ict,-core25,-diary,-inout) %>%filter(child!=1)
+d<-read_dta("data/mtus_teach_ind.dta")
+```
+
+As before we create the STUDY variable to make our life easier:
+
+```{r study}
+d$study<-paste(d$country,d$survey,sep=" ")
+ep$study<-paste(ep$country,ep$survey,sep=" ")
+```
+
+This time, we are going to  look at modes of travel. In the MTUS, travelling is coded by reasons for travel
+
+Using the same method as last time, we create a variable flagging travel for any reason (MTUS codes 62 to 68) undertaken either by car (MTRAV = 1) or any other mean. Note the same approach may be used to exploit information about location or copresence in  any estimates of duration.
+
+`TRC.T` stores the time spent travelling by car... And `TRC.O`, by any other mean...
+
+```{r trc.t}
+ep<-ep%>%mutate(trc.t=ifelse(main>=62 & main<=68 & mtrav==1,time,0),
+                tro.t=ifelse(main>=62 & main<=68 & mtrav>1  & mtrav<=5,time,0))
+```
+
+We can then compute the aggregate duration of travel by car and other means for each day.
+
+```{r meantrav}
+ep<-ep%>%group_by(study,hldid,persid,id)%>%
+         mutate(trc.d=sum(trc.t),tro.d=sum(tro.t))%>%
+         ungroup()
+```
+
+Let's have a quick look at the estimates
+
+```{r hist}
+hist(ep$trc.d[ep$epnum==1 & ep$trc.d>0],freq=F)
+hist(ep$tro.d[ep$epnum==1 & ep$tro.d>0],freq=F)
+
+ep%>%filter(epnum==1)%>%
+     summarise(car=mean(trc.d),
+               oth=mean(tro.d))
+```
+
+We can also  examine the mean and median duration  of  car journeys  vs journeys with other means of transport by country. Spain seems to be an outlier, with fewer car journeys (duration=0) than other countries. The US have the longest daily duration of car journeys, whereas the Netherlands have the longest duration of non car journeys, perhaps due the importance of travel by bicycle in the country
+
+```{r durcar}
+ep%>%filter(epnum==1)%>%group_by(study)%>%summarise(car.mn=mean(trc.d),
+                                                    car.md=median(trc.d),
+                                                    oth.mn=mean(tro.d),
+                                                    oth.md=median(tro.d))
+
+```
+Similarly, one  can compute  the probability of travelling by car vs other means of transport by country.
+
+Please not that strictly speaking these are probabilities that a journey undertaken on a given day involves a car or other means of transport. NOT the probability for someone to travel by car/other means.
+
+```{r meancar}
+ep%>%filter(epnum==1)%>%
+     group_by(study)%>%
+     summarise(prc=mean(trc.d>0),pro=mean(tro.d>0))
+```
+
+... As well as looking at differences according by gender as we did previously, we need to add the daily totals from the episode dataset to the dataset that contains person-level information:  here, the aggregate dataset
+
+```{r merge}
+dt<-merge(d,
+          ep%>%filter(epnum==1)%>%
+          select(study,hldid,persid,id,trc.d,tro.d),
+          by=c("study", "hldid","persid","id"),
+          all.x=F,all.y=F)
+```
+
+Let's recreate a more explicit gender variable as before:
+
+```{r gender}
+dt$gender<-as_factor(dt$sex)
+levels(dt$gender)<-c("Male","Female")
+```
+
+And finally we produce the median estimates of travel duration by gender. We can  also compute the ratio between the two.
+There are interesting gender differences, with men spending more time travelling by car than women across the board in Spain, France and the Netherlands. In most cases people spend more time overall travelling by other means (likely walking) than car, except, for the US.
+
+```{r travgend}
+dt%>%group_by(study,gender)%>%summarise(
+                                 car.md=mean(trc.d),
+                                 oth.md=mean(tro.d),
+                                 rat.md=mean(tro.d)/mean(trc.d))
+```
+
+
+# 2. Weighting and data quality
+
+In general, weighted estimates from time diary data are obtained using the same functions as with other surveys,  using the R `survey` package. These should be preferred as they provide a greater control over the computation of both point estimates and their uncertainty (ie standard errors and/or confidence intervals). However, it is also possible to use ad hoc (ie command -specific)  weighting in some functions from other packages, such as for example `wtd.mean()` and `wtd.var` from the `Hmisc` packages. These will not be explored in details here.
+
+
+## Distribution of days with and without diary weights...
+
+This is a bit more complicated in the  case of MTUS than with  single country  surveys due to the fact that  individual studies each tend to have their own design. 
+
+```{r countryday}
+round(100*
+        prop.table(
+          xtabs(~country+day,d)
+          ,1),1)
+```
+
+After applying the diary weights, the distribution of days has become roughly balanced. PROPWT is the diary weight
+
+```{r propwt}
+round(100*prop.table(xtabs(propwt~country+day,d),1),1)
+```
+
+Note that due to the heterogeneity in the survey design of the studies in the  MTUS dataset, the weights do not compensate for month of the year.
+
+```{r month}
+round(100*prop.table(xtabs(propwt~country+month,d),1),1)
+```
+
+Another illustration of diary weights   from the  the UKTUS 2015. We first load the dataset (this time a time-slot dataset in wide format, with therefore one line per day).
+This dataset is available to UK-based users registered with the UK Data Service. It could not be shared as part of this training course
+
+```{r uktusopen}
+sl<-read_dta("data/uktus15_diary_wide.dta")%>% 
+    filter(DVAge>=16 & DVAge<65 & IndOut==11)%>%
+    select(serial,pnum,daynum,DiaryDay_Act,dmonth,act1_1:act1_144,
+           wher_1:wher_144,wit0_1:wit0_144,dia_wt_a,dia_wt_b)
+```
+
+`DIA_WT_A` is the diary weight. `DiaryDay_Act` is the day the diary was actually recorded (not necessarily the same as the randomly allocated day).
+
+```{r uktusday}
+round(prop.table(xtabs(~DiaryDay_Act,sl))*100,1)
+round(prop.table(xtabs(dia_wt_a~DiaryDay_Act,sl))*100,1)
+```
+
+By contrast with the MTUS, the UK TUS 2014-15 also compensates for month of the year:
+
+```{r uktusmonth}
+round(prop.table(xtabs(~dmonth,sl))*100,1)
+
+round(prop.table(xtabs(dia_wt_a~dmonth,sl))*100,1)
+```
+
+### Visualising  the number of episodes in long format episode datasets
+
+Let us go back to the MTUS. Remember, this is what a full diary looks like:
+
+```{r diary}
+data.frame(ep)[1:20,]
+```
+
+Now we compute the number of episodes per person per day:
+
+```{r maxep}
+ep<-ep%>%group_by(study,hldid,persid,id)%>%
+         mutate(maxep=max(epnum))%>%
+         ungroup()
+```
+
+Most diaries have between 15 and 25 episodes.
+
+```{r descep}
+table(ep$maxep[ep$epnum==1])
+hist(ep$maxep[ep$epnum==1],freq = F)
+```
+
+Diaries with less than 7 episodes:
+
+```{r less7}
+prop.table(
+  table(ep$maxep[ep$epnum==1]<7)
+)
+```
+
+More than 80% of diaries have 15 episodes recorded or more:
+
+```{r more15}
+prop.table(
+  table(ep$maxep[ep$epnum==1]>=15)
+)
+```
+
+UK diaries have the largest number of episodes recorded on average.
+
+```{r qualcountry}
+ep%>%group_by(study)%>%filter(epnum==1)%>%summarise(epnr=mean(maxep))
+```
+
+# 3. Plotting tempograms with MTUS data
+### Overview
+
+We will proceed by  converting an MTUS episode dataset (in long format)  into a time slot file with 144 observations per day and subsequently use it to plot simple tempograms. This is achieved by  applying the function `uncount()` from the `tidyr` package, then creating a slot number ie index variable in order to make sure that all diary days have 144 observations. `uncount()` requires a count variables which  determines the number of slots into which to 'unpack' episodes: we will using episode duration/10.
+
+We first need to perform some  quality checks. In order to do this,  we create MINEP (number of first episode in each diary), MAXEND (number of episodes in the diary), and SUMTIME, total number of minutes reported in the diary. Due to issues with diary resolution,  data from the Netherlands and the US  will not be used. 
+
+<!-- ep.m<-merge(ep.m,d%>%select(country, year, hldid,persid,id,propwt), -->
+<!--             by=c("country", "year", "hldid","persid","id"), -->
+<!--           all.x=F,all.y=F) -->
+
+
+```{r newdat}
+ep.m<-ep%>%
+      filter(study=="UK 2014" | study=="FR 2009"| study=="ES 2009" & (day>1 & day<7))%>%
+      group_by(study,hldid,persid,id)%>%
+      mutate(minep=min(epnum),maxep=max(epnum),sumtime=sum(time),maxend=max(end))%>%
+      ungroup()
+
+ep.m<-merge(
+           ep.m,d%>%select(study,hldid,persid,id,propwt),
+           by=c("study","hldid","persid","id"), 
+           all.x = T,all.y = F
+)
+```
+
+
+We have quite a few diaries that do not begin with episode number 1, especially in the UK.
+
+```{r Clean}
+table(ep.m$minep)
+round(100*prop.table(table(ep.m$minep==1,ep.m$country),2),1)
+```
+We also have a large number of diaries whose total reported time is different from 1440 minutes....
+```{r checktotal}
+Hmisc::describe(ep.m$sumtime)
+round(100*prop.table(xtabs(~(sumtime==1440)+country,subset=epnum==1,ep.m),2),1)
+```
+... And a smaller number with the last episode not ending at the 1440th minute.
+```{r checkend}
+Hmisc::describe(ep.m$maxend)
+round(100*prop.table(xtabs(~(maxend==1440)+country,subset=epnum==1,ep.m),2),1)
+```
+All in all, we need to drop between 15 and 40% of diaries.
+
+```{r tabclean}
+round(
+      100*prop.table(
+          xtabs(~(minep==1 & sumtime==1440 & maxend==1440)+country,
+                subset=epnum==1,ep.m)
+          ,2)
+      ,1)
+
+```
+We can then create the time slot dataset.
+
+```{r slot}
+ep.m$count<-round(ep.m$time/10)
+slot.m<-ep.m%>%filter(minep==1 & sumtime==1440 & maxend==1440)%>%uncount(count,.id="sltest")
+```
+... Then compute and examine the number of slots by diary by country.
+```{r checkslot}
+slot.m<-slot.m%>%
+        group_by(study,hldid,persid,id)%>%
+        mutate(slotnum=row_number(),maxslot=max(slotnum))%>%
+        ungroup()
+
+head(slot.m)
+table(slot.m$maxslot)
+table(slot.m$maxslot,slot.m$country)
+```
+
+And now for the tempogram.
+
+```{r tempogram, fig.show='asis',out.width="90%"}
+lab.l<-c("Sleep & Self-care","Work and schooling","Reproductive work & shopping",
+         "Caring","Volunteering","Physical activity","Leisure","Other")
+
+slot.m<-slot.m%>%mutate(main.s=case_when(
+                        main>=1& main<7 ~ lab.l[1],  
+                        main>=7& main<17 ~ lab.l[2],                                      
+                        main>=18& main<27 ~ lab.l[3],                                     
+                        main>=27& main<33 ~ lab.l[4],                                     
+                        main>=33& main<35 ~ lab.l[5],                                     
+                        main>=42& main<48 ~ lab.l[6],                                     
+                        (main>=35& main<41) | (main>=48& main<69) ~ lab.l[7],
+                        main==41 | main==17 | main==69~lab.l[8] )
+                        )
+
+slot.m$main.s<-as.factor(slot.m$main.s)
+  slot.m$main.s<-factor(slot.m$main.s,levels=levels(slot.m$main.s)[c(6,8,5,1,7,4,2,3)])
+
+tmp.r<-list()
+for(c in c("ES","FR", "UK")){
+tmp.r[[c]]<-matrix(nrow=1,ncol=8)
+for(i in 1:144){
+### Unweighted version, for reference
+## tmp.r[[c]]<-rbind(tmp.r[[c]],round(100*prop.table(xtabs(~main.s,slot.m%>%filter(slotnum==i & country==c)),1))
+
+### In the weighted version the weighting variable PROPWT comes on the left hand side of the formula
+tmp.r[[c]]<-rbind(tmp.r[[c]],
+                  round(100*prop.table(xtabs(propwt~main.s,slot.m%>%
+                  filter(slotnum==i & country==c))),1))
+                  }
+tmp.r[[c]]<-data.frame(tmp.r[[c]][-1,])
+names(tmp.r[[c]])<-lab.l
+tmp.r[[c]]$time<-1:144
+}
+
+library(reshape2)
+
+for(c in c("ES","FR", "UK")){
+tmp.g<-melt(tmp.r[[c]],id.vars="time")
+names(tmp.g)[2]<-"Activity"
+tmp.g$min=230+(tmp.g$time*10)
+tmp.g$min<-ifelse(tmp.g$min>1440,tmp.g$min-1440,tmp.g$min)
+tmp.g$ct=paste0(floor(tmp.g$min/60),":",round(((tmp.g$min/60)-floor(tmp.g$min/60))*60))
+levels(tmp.g$Activity)<-lab.l
+
+#### Plotting the results
+tmp.plot<-ggplot(tmp.g, aes(x=time,y=value))+
+          geom_area(aes(color=Activity,fill=Activity),alpha=0.5,position='stack')+
+  scale_x_continuous(name="Time of the day",breaks=c(seq(1,144,6)),labels=c(4:24,1:3))+
+  scale_y_continuous(name="% of  people by activity ")+
+  ggtitle(paste0("Typical daily activities (",c,"-MTUS)"))+
+  #### Not strictly necessary, but makes our plot looks nice
+  theme(
+        legend.title= element_blank(),
+        legend.text= element_text(size=12),
+        legend.position="bottom",
+        axis.text.y= element_text(size=16),
+        axis.text.x= element_text(size=16),
+        panel.background = element_rect(fill = "transparent"), 
+)+
+  guides(colour = guide_legend(nrow = 3))
+print(tmp.plot)
+#ggsave(tmp.plot, filename=paste0("temp_",c,".png"),height=8,width = 12,bg = "transparent")
+
+}
+
+```
+
