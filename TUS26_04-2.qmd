@@ -99,10 +99,9 @@ format:
 
 ## Slot-level data 
 
-- Each line records the time unit of the diary 
-- Largest datasets
-- 144 observations (ie 10 minute slots) per day
-- Requires a slot identifier variables
+- Each line records a 10 minute time slot of the diary 
+- 144 observations (ie lines) per day per respondent
+- Requires a slot ID variables
 	
 |	Slot nr|Person nr	|Day nr	|Activity|				
 |--------|----------|-------|--------|
@@ -119,11 +118,8 @@ format:
 
 ## Data structure  in wide format
 	
-- During this course, we will be working with episode files in the long format
-- However, episode or time slots  datasets are also available in wide format:
+- Episode and time slots  datasets are also available in wide format.
 - Example of a time slots dataset in the wide format:
-		
-
 
 |Day|Pers. |Activity -- TS 1|...|Act. -- TS 42|...|Act. -- TS 144	
 |----|-----|----------------|---|-------------|---|--------------|
@@ -132,36 +128,32 @@ format:
 |1  |2				|Sleep|...|Shower|...|Sleep
 	
 
-- Each line represents a day, each time slot  and its attributes (activities, location, copresence are recorded in one variable)
-- Lots of variable, less intuitive but more parsimonious than the long format
+- Lines $=$days, variables records activity, location, copresence for one time slot  
+- Lots of variable, less intuitive but also less resource-intensive than the long format
+- During this course, we will be working with episode files in the long format
 
 
 
-## Common time diary variables
-	
-- Most time diary datasets include similar variables:
+## Variables in time diary dataset
+- Primary and secondary activities
+- If episode files: duration
+- Incremental time/clock time
+- Copresence, ie 'with who were you?'
+- Location
+- Day of the week, month, calendar date
+- Diary number (ie whether this diary was the first one collected)
 
-  - Primary and secondary activities
-  - If episode files: duration
-  - Incremental time/clock time
-  - Copresence, ie 'with who were you?'
-  - Location
-  - Day of the week, month, calendar date
-  - Diary number (ie whether this diary was the first one collected)
+- Less common variables/recent innovations
 
-  - Less common variables/recent innovations
-
-		 - Whether feels rushed on the day
-		 - Enjoyment
-		 - Device use
-		 - Work schedule
+	 - Whether feels rushed on the day
+	 - Enjoyment
+	 - Device use
+	 - Work schedule
 					
-
-
 
 ## Nomenclatures of activities
 
-- In many time use surveys, respondents still fill in their time diary by hand
+- Respondents still fill in their time diary by hand
 - Activities are written down literally (ie *I walked the dog around the block*) and need to be recoded
 - Indispensable to standardise activities
 - National and international norms and guidelines for coding activities

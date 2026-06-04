@@ -1,45 +1,4 @@
----
-title: Introduction to quantitative time diary analysis
-subtitle: Day 1 exercices
-author: Pierre Walthéry
-organisation:   UK Data Service and Centre for Time Use Research 
-date: "June 2026"
-date-format: MMMM YYYY
-
-mainfont: "Open Sans"
-sansfont: "Open Sans"
-
-format:
-#  pdf:
-#    toc: false
-#    number-sections: false
-#    colorlinks: true
-#    papersize: A4
-#    geometry:
-#       - top=30mm
-#        - left=20mm
-#        - heightrounded
-  html:
-    toc: true
-    toc-location: left
-    toc-title: Content
-    embed-resources: true
-    sidebar:
-      style: "floating"
-      search: true
-      title: " "
-      logo: pics/UKDS_Logos_Col_Grey_300dpi.png
-      logo-href: https://ukdataservice.ac.uk/
-      logo-alt: "UK Data Service Logo and link to website"
-
-
-pdf-engine: lualatex
-execute:
-  echo: true
-  warning: false
----
-
-
+# Workbook 1
 ## 1. Setting things up
 
 R studio  has many functionalities, but for the purpose of this workshop, we will keep it simple and use it merely as a two-windows text editor. 
@@ -72,7 +31,7 @@ We will open the Stata dataset using `read_dta()` from the `haven` package, whic
 We begin by removing  a few variables that we will not be using from the dataset. We also remove the children respondents to keep things as simple as possible: 
 
 ```{r clean}
-ep<-data.frame(
+ep<-(
     read_dta("~/Data/mtus/mtus_teach_ep.dta") %>%
     select(-msamp,-swave,-ict,-core25,-inout,-diary) %>%
     filter(child!=1)
@@ -119,8 +78,6 @@ We can then explore a few variables, for example the number of episodes by count
 
 ```{r country}
 table(ep$country)
-table(as_factor(ep$country))
-
 ```
 
 ... by survey year...
