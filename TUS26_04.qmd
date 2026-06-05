@@ -31,6 +31,7 @@ collapse-callout:
 
 format: 
   revealjs:
+    theme: [default,caption.scss]
     scrollable: true
     logo: 
       path: "pics/UKDS_Logos_Col_Grey_300dpi.png"
@@ -72,7 +73,7 @@ format:
 
 ## 
 
-![Source: DALL-E](pics/dali) 
+![Source: DALL-E](pics/dali){fig-align="left" fig-alt="A drawing representating the fluidity and the difficulty of capturing time"} 
  
 
 # 1. Origins of time use research
@@ -81,17 +82,18 @@ format:
 
 Time as implicit knowledge (Adam 1996)
 
+-  *Contextual time or timescapes* 	
+  
+   -  Natural time (ie seasons, planetary cycles)
+   -  Has a direction, which is irreversible (ie birth, ageing and death)
+   -  Plural experiences (between people, other beings, etc...)
+
 -  *Delimited time*
 
    -  can be *measured*  and  *divided*  (by clock  and calendars); 
    -  universal and invariable rhythms (ie days, months are the same everywhere); 
    -  that is a limited and commodified resource: valuing speed
 
--  *Contextual time or timescapes* 	
-  
-   -  Natural time (ie seasons, planetary cycles)
-   -  Has a direction, which is irreversible (ie birth, ageing and death)
-   -  Plural experiences (between people, other beings, etc...)
 
 
  
@@ -101,7 +103,7 @@ Time as implicit knowledge (Adam 1996)
 
    - Surveys of peasant households in pre-1917 Russia  
    - Time use of working class women in London 1909-13 by the Fabians 
-   - Time budget of Soviet Workers and peassan in 1923–1924; 
+   - Time budget of Soviet workers and peasants in 1923–1924; 
    - USDA  large-scale time-diary studies of American households:
    
      - 1924-28 Farm and small towns households
@@ -110,7 +112,7 @@ Time as implicit knowledge (Adam 1996)
 -  In the UK (1930s onwards): 
 
    - Mass Observation  
-   - the BBC listener surveys
+   - BBC [listener surveys](https://britishonlinearchives.com/collections/16/bbc-listener-research-department-reports-1937-c1950) (1937-)
 
 
 ## More recently 
@@ -123,25 +125,12 @@ Time as implicit knowledge (Adam 1996)
 - Large scale nationally representative surveys
 
   - American Time Use Study; Indian Time Use Survey, UK, etc..
-/
+
 - Harmonisation efforts: 
 
   - Multinational Time Use Study (MTUS)
   - Harmonised European Time Use Surveys (HETUS) from 1998; 
   - International Classification of Activities for Time Use Statistics (ICATUS-2005)
-
-
-
-## What drives this interest for time use? 
-
--  Push to monitoring  productivity, in particular household productivity
--  Finer understanding of labour force behaviour
--  Social (central) planning
--  Better understanding of consumer behaviour
--  Investigate social issues ie poverty, gender inequality
--  More broadly part of continued rationalisation of societies (Weber)
-			
- 
 
 ## In the UK
 
@@ -158,6 +147,25 @@ Also:
 )
 
 - [CTUR UK Time Use Survey, March 2023](https://datacatalogue.ukdataservice.ac.uk/studies/study/9336#details)
+
+
+
+
+## What drives this interest for time use? 
+
+:::: {.columns}
+::: {.column width="60%"}
+-  Push to monitoring  (household) productivity
+-  Finer understanding of labour force behaviour
+-  Social (central) planning
+-  Better understanding of consumer behaviour
+-  Investigate social issues ie poverty, gender inequality
+-  More broadly part of the trend towards continued rationalisation of societies (Weber) 
+:::
+::: {.column width="40%"}
+![Ernst Gottmann, public domain via Wikimedia Commons](pics/Max_Weber_in_1918.png){width="60%" fig-align="left"  fig-alt="A photograph of Max Weber in 1918"}
+:::
+:::: 
 
 <!-- ## What does  time use surveys look like?  -->
 
@@ -203,10 +211,9 @@ Also:
  
 ## A paper time diary example 
 	
-![](pics/diary1) 
+![From Gershuny et al 2020](pics/diary1){fig-align="left" fig-alt="A screenshot of the paper diary from the 2014-15 UK Tome Use Survey" } 
 	
-(Source: Gershuny et al 2020)
- 
+
 
 
 
@@ -222,10 +229,9 @@ Also:
  
 ## Durations of activities  
 			
-![](pics/aggreg1)
+![From Gershuny et al 2020](pics/aggreg1){fig-align="left" fig-alt="A plot representing the average daily time spent in various activities in the UK 1961-2015"}
 			
-Source: Gershuny et al 2020
-	 
+
 ## Duration of activities? 
 
 -  For simplicity, activities were grouped in 4 categories
@@ -254,28 +260,35 @@ Source: Gershuny et al 2020
  
 ## 
 
+:::: {style="font-size: 0.5em"}
+
 ::: {layout-ncol=2}
 
-![Women](pics/t1961_w)
+![](pics/t1961_w){fig-align="left" fig-alt="Tempogram of daily activities, women, 1961" }
 
-![Men](pics/t1961_m)
+![](pics/t1961_m){fig-align="left" fig-alt="Tempogram of daily activities, men, 1961" }
 
-(Source: Gershuny et al 2020)
+Source Gershuny et al 2020
+
 :::
+::::
 
 
 
  
 ## 
+:::: {style="font-size: 0.5em"}
+
 ::: {layout-ncol=2}
 
-![Women](pics/t2015_w)
 
-![Men](pics/t2015_m)
+![](pics/t2015_w){fig-align="left" fig-alt="Tempogram of daily activities, women, 2015" }
+
+![](pics/t2015_m){fig-align="left" fig-alt="Tempogram of daily activities, men, 2015" }
 
 (Source: Gershuny et al 2020)
 :::
- 
+:::: 
 
 
 
@@ -283,7 +296,7 @@ Source: Gershuny et al 2020
 ## Summary 
  
 -  Over the course of the 20th century, rise of interest for the way men, women and households spend their time 
--  Systematic time diary data collection from the 1960s
+<!-- -  Systematic time diary data collection from the 1960s -->
 -  There is now large amount of comparative data enabling time use research 
 -  Time diaries record primary, secondary activities and their context
 -  Stability *and*  change in daily behaviour over the last 50 years; gender contrasts
@@ -310,7 +323,7 @@ Source: Gershuny et al 2020
 
 ## Data structure of time use surveys
 
-![](pics/concentric){fig-align="center"}
+![Source: Dall-E](pics/concentric){fig-align="left" fig-alt="A drawing representing the structure of time-diary household surveys"}
 
 
 ## Data structure  and files 
@@ -411,15 +424,15 @@ Source: Gershuny et al 2020
 
 ## Harmonised European Time-use survey nomenclature	
 
-![](pics/HETUS){fig-align="center"}
+![Source: Eurostat](pics/HETUS){fig-align="center" fig-alt="Screenshot from the HETUS nomenclature of activities"}
 
 ## Indian Time Use Survey nomenclature	
 
-![](pics/ITUS){fig-align="center"}
+![Source: Ministry of Statistics and Programme Implementation (MoSPI)](pics/ITUS){fig-align="center" fig-alt="Screenshot from the Indian Time Use Nomenclature of activities"}
 
 ## American Time Use Survey nomenclature	
 
-![](pics/ATUS){fig-align="center"}
+![Source: US Bureau of Labor Statistics](pics/ATUS){fig-align="center" fig-alt="Screenshot from the American Time Use Nomenclature of activities"}
 
 <!-- ## MTUS nomenclature	 -->
 
@@ -443,7 +456,7 @@ Adam, B. (1995). Timewatch: The Social Analysis of Time. Polity Press.
 
 Baster, N. (1958). Some Early Family Budget Studies of Russian Workers. American Slavic and East European Review
 
-Gershuny, J., & Sullivan, O. (2019). What We Really Do All Day: Insights from the Centre for Time Use Research. Penguin UK.
+Gershuny, J., & Sullivan, O. (2020). What We Really Do All Day: Insights from the Centre for Time Use Research. Penguin UK.
 
 Pember Reeves, M. (1913). Round About a Pound a Week. Fabian Society
 
