@@ -1,7 +1,6 @@
 ## Introduction to time diary data
 
-Landing page for the Introduction to time diary data UKDS short course
+Landing page for the Introduction to time diary data 2026 UKDS short course
 
-[Slides day 1](https://UKdataserviceopen.github.io/TUS2026/TUS26_04.html)
 [Slides day 1](TUS26_04.html)
 
