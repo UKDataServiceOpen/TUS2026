@@ -66,10 +66,12 @@ format:
 
 - Day 2
 
-  - Computing tempograms
+  - Further examples
   - Data quality and weighting
-  - Working with work schedules
   - Research example
+  - Working with work schedules
+  - Computing tempograms
+
 
 ## 
 

@@ -48,17 +48,18 @@ format:
 
 ## 
   
-![Source: DALL-E](pics/dali)(fig-align="left" fig-alt="A drawing representating the fluidity and the difficulty of capturing time")
+![Source: DALL-E](pics/dali){fig-align="left" fig-alt="A drawing representating the fluidity and the difficulty of capturing time"}
 
 
 ## Day 2
 
 - Objectives
   - Compute duration estimates
+  - Understand potential time diary quality issues 
   - Understand and deploy diary weights for inference
   - Understand and compute tempograms
-
--Plan
+- Presentations + code demonstrations
+- Plan
   - Recap from Day 1
   - Another illustration: mode of travel
   - Weighting and data quality
@@ -71,10 +72,11 @@ format:
 ## Essentials of time diary survey data
 
 - Time use data typically consists of:
-  - Individual file
+  - Individual/aggregate file
   - Diary file
-      - Most of the time episodes 
+      - Most of the time consists of episodes 
       - Combination of activities (primary/secondary), copresence, location
+      - Sometimes day-level variables (Typical day?)
       - Variables: start & end time, duration, content + the above
       - Less commonly: time slots
 
@@ -114,7 +116,7 @@ format:
 - In order to tackle sample bias, estimation should include :
   - Weights --> point estimates
   - Survey design variables (ie PSUs and strata) --> Adjusted confidence intervals/standard errors
-  - ... Not always possible.
+  - ... Not always possible to access SD variables
  
  
 
@@ -250,7 +252,7 @@ format:
 		 
 		-  Different activities may have different distributions
 		-  Zeroes need to be dealt with: separately  or via selection models
-		-  Clustering of observations: robust standard errors; fixed effects/GEE models
+		-  Clustering of observations: robust standard errors; fixed effects/ models
 		 
 - In *R*, `lm()` or `glm()` from the *stats* package. 
 - Functions for robust standard errors estimation: ie *sandwich* *estimatr* packages
@@ -263,7 +265,7 @@ format:
 -  Focus on *sequences* of (a limited number of) activities or episodes
 -  Group them into clusters (via cluster analysis) based on their *distance*
 -  Perform further analyses (ie probability of being in a given cluster rather than another) on the outcome
--  See Lesnard and Kan(2011) and Vagni (2020) for an example with atypical work
+-  See Lesnard and Kan(2011) and Vagni (2020) for  examples focusing on paid work
 -  See R package [TraMineR](https://traminer.unige.ch) (Gabadinho et al 2011) 
  
 ## Sequence visualisation
@@ -280,8 +282,7 @@ Gabadinho A, Ritschard G, Müller N, Studer M (2011). “Analyzing and Visualizi
 Lesnard, L. and Kan, M.Y. (2011), Investigating scheduling of work: a two-stage optimal matching analysis of workdays and workweeks. Journal of the Royal Statistical Society: Series A (Statistics in Society), 174: 349-368. [doi:10.1111/j.1467-985X.2010.00670.x](https://doi.org/10.1111/j.1467-985X.2010.00670.x)
 
 
-Vagni G. The social stratification of time use patterns. Br J Sociol. 2020;71:658–679, [doi: 10.1111/1468-4446.12759](
-https://doi.org/10.1111/1468-4446.12759)
+Vagni G. The social stratification of time use patterns. Br J Sociol. 2020;71:658–679, [doi: 10.1111/1468-4446.12759](https://doi.org/10.1111/1468-4446.12759)
 
 
 Zeileis A, Köll S, Graham N (2020). “Various Versatile Variances: An Object-Oriented Implementation of Clustered Covariances in R.” Journal of Statistical Software, 95(1), 1–36. [doi:10.18637/jss.v095.i01](https://doi.org/10.18637/jss.v095.i01)
@@ -292,5 +293,6 @@ Zeileis A, Köll S, Graham N (2020). “Various Versatile Variances: An Object-O
 - Time Use in Canada: [Interactive visualization tool at Statistics
 Canada](https://www150.statcan.gc.ca/n1/pub/71-607-x/71-607-x2025002-eng.htm)
 
-- Nathan Yau 3[Who we choose to spend our days with](https://flowingdata.com/2025/12/17/time-with-others/) (data from ATUS)
+- Nathan Yau [Who we choose to spend our days with](https://flowingdata.com/2025/12/17/time-with-others/) (data from ATUS)
 - Kamila Kolpashnikova's time use data [visualisation tools on GitHub](https://github.com/Kolpashnikova/Kolpashnikova) 
+- [Multination Time Use Study User Manual](https://www.timeuse.org/MTUS-User-Guide)
