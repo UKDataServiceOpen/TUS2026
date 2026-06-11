@@ -1,9 +1,9 @@
-# Workbook 1
+# Day 1 Workbook
 ## 1. Setting things up
 
-R studio  has many functionalities, but for the purpose of this workshop, we will keep it simple and use it merely as a two-windows text editor. 
+R studio  has many functionalities, but for the purpose of this workshop, we will use it merely as a two-panel text editor. 
 
-We first need to load the R libraries we are going to need:
+We first need to load the R libraries we are going to use throughout:
 
     - dplyr for data manipulation
     - haven for opening stata/SPSS datasets
