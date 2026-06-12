@@ -1,0 +1,131 @@
+---
+title: "UKDS Time Use Talk"
+subtitle: "Activities in Context in Time Use Research"
+author: "Killian Mullan, Aston University"
+format: 
+  revealjs:
+    incremental: true
+    embed-resources: true
+    self-contained-math: true
+editor: visual
+---
+
+## Overview {style="font-size:48px"}
+
+- The analysis of time spent in different activities throughout the day is the backbone of time use research...but
+- Data about activities can be enhanced by putting it in context
+- And contextual data can be a source of much that is interesting to know about how we spend our time
+
+## About me {style="font-size:42px"}
+
+- Began working with time use data in 2003
+
+- Main focus of research focuses on children's time use, and the gender division of labour
+
+  - How has children's time use changed?
+
+  - How it is impacted by parents?
+
+  - How it has been impacted by technology?
+
+- Also interested in questions about measurement of aspects of the context of daily life in time use surveys - particularly time with children and time using devices
+
+## What is context in daily time use? {style="font-size:42px"}
+
+- The places where you are engaging in activities (at home, outside), and modes of travel when on the move
+
+- The people you are with during the day - including time when you are alone
+
+- Time using devices has emerged as an ambiguous area in time use as something directly linked to activities, but also serving as a platform for a range of other activities
+
+- Have I missed anything?
+
+## How is context captured in time use surveys? {style="font-size:40px"}
+
+- Running parallel to fields in time diaries that collect data on main and (sometimes) secondary activities, [diary instruments](https://doc.ukdataservice.ac.uk/doc/8128/mrdoc/pdf/8128_natcen_reports.pdf) often ask a number questions capturing contextual information:
+  - Where were you/mode of travel?
+  - Who were you with?
+  - Was a child in your care? (ATUS)
+  - Were you using a device? (e.g., smartphone/tablet)
+
+## Why is context important? {style="font-size:48px"}
+
+- Measuring time caring for children
+
+- Analysing the impact of maternal employment on children's time use
+
+- A multi-layered understanding change in children's time use
+
+- Exploring the impact of digital devices in children's daily lives
+
+## How much time do parents spend caring for children? {style="font-size:40px"}
+
+- A core question in time use research: scholars interested in tracking change over time, gender differences, and the impact of other factors such as education and parenting norms
+
+- Focusing only on care recorded as a primary activity provides a limited measure
+
+- Adding secondary activities is better, but:
+
+  - Burdensome and prone to prompt bias; and another activity-based measure
+
+## Using context to measure time caring for children {style="font-size:38px"}
+
+- Using contextual information about whether or not a parent is co-present with a child provides a more complete account of the total time parents spend caring for children
+
+- There are variations in how this is conceptualized and measured
+
+  - Co-present in the same room, or same place; engaged in the same activity (was anyone doing the activity with you?)
+
+- Can also incorporate bespoke fields; for example the 'in-your-care' question in the American Time Use Survey (ATUS)
+
+## Maternal employment and childcare time {style="font-size:40px"}
+
+- What impact has increasing maternal employment had on childcare time?
+
+- Time use research has convincingly shown that this had limited impact on the time they spent caring for children
+
+- Impact concentrated in supervisory care
+
+  - Using contextual data (time co-present with children) was crucial to showing this
+
+## Maternal employment and children's time use {style="font-size:36px"}
+
+- What impact has increasing maternal employment had on children's activities?
+
+- Crucial to understand how maternal employment impacted who children spent time with as well as what they were doing
+
+- [I combined data](https://onlinelibrary.wiley.com/doi/full/10.1111/j.1468-4446.2009.01273.x) on children's activities with data on who they were with, showing that
+
+- Less time with FT employed mothers, more time with fathers; and when with fathers...
+
+- More time watching TV
+
+## Change in children's time use {style="font-size:42px"}
+
+- Major study of change in children's time use from mid-70s to 2015: [A Child's Day](https://bristoluniversitypress.co.uk/a-childs-day)
+
+- Focus on activities, but also on location - time at home
+
+- Used a combination of information about activities and location to create a set of measure of time in different activities when at home and not at home
+
+- Found a substantial shift toward spending more time in activities at home, with substantially less time in unstructured leisure outside the home
+
+## Time using devices {style="font-size:34px"}
+
+- Screen time - major source of concern
+
+- Critically, time use surveys recognise that device use is concurrent with time in other activities - it has become part of the context of daily life
+
+- [I showed](https://link.springer.com/article/10.1007/s12187-017-9509-0) children spend a substantial amount of time using devices, but alongside time in other screen-based activities, with no evidence to suggest time in other activities was compromised in any way
+
+  - See [here](https://link.springer.com/article/10.1007%2Fs12187-021-09884-3) for UK-US comparative analysis
+
+- [Other work](https://onlinelibrary.wiley.com/doi/full/10.1111/jomf.12564), drawing on co-presence, location, and device use data, found a significant increase between 2000 and 2015 in time children stated they were alone, when at home when their parents were also at home
+
+- Children reported using devices for most of this time 'alone-together'
+
+## Concluding comments {style="font-size:48px"}
+
+- Activities take place in context and sometimes aspects of this context is of primary interest
+- Time use research can be enhanced by incorporating contextual data into measures of time use - alone and in combination with activities
+- Thanks - any questions/comments?

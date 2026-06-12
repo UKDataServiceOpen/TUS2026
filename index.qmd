@@ -2,6 +2,9 @@
 
 <!-- ## **Landing page for the *Introduction to Time Diary Data* 2026 UKDS short course** -->
 
-[Slides day 1](TUS26_04.html){target="_blank"}
+[**Slides day 1**](TUS26_04.html){target="_blank"}
 
-[Slides day 2](TUS26_11.html){target="_blank"}
+**Slides day 2:**
+
+- [Main presentation](TUS26_11.html){target="_blank"}
+- [Killian Mullan](UKDS_TUS_Mullan.html){target="_blank"}
